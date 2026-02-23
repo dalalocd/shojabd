@@ -1,0 +1,105 @@
+:root {
+  --bg: #0b1220;
+  --card: #131c30;
+  --text: #e6ecff;
+  --muted: #a8b3cf;
+  --brand: #5aa2ff;
+  --border: #243252;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg, #0a1020 0%, #0f172a 100%);
+  color: var(--text);
+}
+
+.container { width: min(1000px, 92%); margin: 0 auto; }
+.section { padding: 56px 0; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.logo { font-weight: 800; letter-spacing: .4px; }
+nav a { color: var(--muted); text-decoration: none; margin-left: 16px; }
+nav a:hover { color: #fff; }
+
+.hero { padding: 64px 0 36px; }
+.hero h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 12px; }
+.hero p { color: var(--muted); max-width: 640px; }
+.hero-cta { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+.btn {
+  background: var(--brand);
+  color: #061227;
+  border: none;
+  padding: 11px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-sm { padding: 8px 12px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.card {
+  background: rgba(19,28,48,.8);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+.card h3 { margin-top: 0; }
+.card p, .card li { color: var(--muted); }
+
+ol li { margin: 10px 0; color: var(--muted); }
+
+.form-wrap {
+  background: rgba(12, 19, 34, .65);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+.lead-form label {
+  display: block;
+  font-size: .95rem;
+  margin-bottom: 10px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+input, select, textarea {
+  width: 100%;
+  margin-top: 6px;
+  background: #0b1220;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid rgba(90,162,255,.35);
+  border-color: var(--brand);
+}
+
+.note { color: var(--muted); font-size: .85rem; }
+.footer { padding: 24px 0 42px; color: var(--muted); }
+
+@media (max-width: 720px) {
+  nav a { margin-left: 10px; font-size: .95rem; }
+}

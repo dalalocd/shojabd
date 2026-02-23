@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShojaBD | Trusted Local Services, Fast</title>
+  <meta name="description" content="Book trusted AC servicing and home cleaning in Dhaka. Fast response, verified providers, fair pricing." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <div class="logo">ShojaBD</div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="partners.html">For Providers</a>
+      <a class="btn btn-sm" href="#book">Book Now</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1>Trusted local services, fast.</h1>
+      <p>AC servicing and home cleaning in Dhaka, with quick response and vetted service partners.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#book">Book a Service</a>
+        <a class="btn btn-outline" href="partners.html">Join as Provider</a>
+      </div>
+    </section>
+
+    <section id="services" class="container section">
+      <h2>Launch Services (V1)</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>AC Servicing</h3>
+          <p>General service, gas check/refill, cooling issue diagnosis, urgent repair.</p>
+        </article>
+        <article class="card">
+          <h3>Home Cleaning</h3>
+          <p>Deep cleaning, move-in/move-out cleanup, kitchen and bathroom intensive service.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how" class="container section">
+      <h2>How it works</h2>
+      <ol>
+        <li>You submit your service request.</li>
+        <li>We match you with a verified provider in your area.</li>
+        <li>Provider confirms timing and completes the job.</li>
+      </ol>
+    </section>
+
+    <section id="book" class="container section form-wrap">
+      <h2>Book a Service</h2>
+      <p>Fill this quick form. We’ll route your request to the right provider.</p>
+
+      <form id="leadForm" class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
+        <div class="grid">
+          <label>Full Name
+            <input name="name" type="text" required />
+          </label>
+          <label>Phone / WhatsApp
+            <input name="phone" type="tel" required />
+          </label>
+        </div>
+
+        <div class="grid">
+          <label>Service Type
+            <select name="service" required>
+              <option value="">Select one</option>
+              <option>AC Servicing</option>
+              <option>AC Repair</option>
+              <option>Home Cleaning</option>
+              <option>Deep Cleaning</option>
+            </select>
+          </label>
+          <label>Area
+            <input name="area" type="text" placeholder="e.g. Dhanmondi" required />
+          </label>
+        </div>
+
+        <label>Preferred Time
+          <input name="time" type="text" placeholder="Today evening / Tomorrow morning" />
+        </label>
+
+        <label>Problem / Notes
+          <textarea name="notes" rows="4" placeholder="Tell us what you need..."></textarea>
+        </label>
+
+        <button class="btn" type="submit">Submit Request</button>
+        <p class="note">By submitting, you agree to be contacted by ShojaBD or its service partners.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="year"></span> ShojaBD. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

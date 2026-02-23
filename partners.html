@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join as Provider | ShojaBD</title>
+  <meta name="description" content="Join ShojaBD as a service provider and get qualified leads in your service area." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <div class="logo">ShojaBD</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#book">Book Service</a>
+    </nav>
+  </header>
+
+  <main class="container section">
+    <h1>Join as a Service Provider</h1>
+    <p>We connect providers with ready customers in Dhaka. Start with a trial and get matched leads in your service area.</p>
+
+    <div class="cards">
+      <article class="card">
+        <h3>How partners earn</h3>
+        <ul>
+          <li>Pay per qualified lead, or monthly package</li>
+          <li>Leads filtered by area and service type</li>
+          <li>Priority routing for high-performing providers</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Provider standards</h3>
+        <ul>
+          <li>Respond quickly (target: 5–10 min)</li>
+          <li>Transparent pricing</li>
+          <li>Professional behavior and quality work</li>
+        </ul>
+      </article>
+    </div>
+
+    <section class="form-wrap">
+      <h2>Apply Now</h2>
+      <form class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
+        <div class="grid">
+          <label>Business Name
+            <input name="business_name" type="text" required />
+          </label>
+          <label>Contact Person
+            <input name="contact_person" type="text" required />
+          </label>
+        </div>
+
+        <div class="grid">
+          <label>Phone / WhatsApp
+            <input name="phone" type="tel" required />
+          </label>
+          <label>Primary Service
+            <select name="service" required>
+              <option value="">Select one</option>
+              <option>AC Servicing / Repair</option>
+              <option>Home Cleaning</option>
+            </select>
+          </label>
+        </div>
+
+        <label>Coverage Areas
+          <input name="areas" type="text" placeholder="e.g. Dhanmondi, Gulshan, Mirpur" required />
+        </label>
+
+        <button class="btn" type="submit">Submit Provider Application</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>© <span id="year"></span> ShojaBD. All rights reserved.</p>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
