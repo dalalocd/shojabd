@@ -1,101 +1,102 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShojaBD | Trusted Local Services, Fast</title>
-  <meta name="description" content="Book trusted AC servicing and home cleaning in Dhaka. Fast response, verified providers, fair pricing." />
+  <title>ShojaBD | দ্রুত বিশ্বস্ত লোকাল সার্ভিস</title>
+  <meta name="description" content="ঢাকায় AC সার্ভিসিং ও হোম ক্লিনিং বুক করুন দ্রুত এবং বিশ্বস্ত সার্ভিস পার্টনারদের মাধ্যমে।" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <header class="container header">
     <div class="logo">ShojaBD</div>
     <nav>
-      <a href="#services">Services</a>
-      <a href="#how">How it works</a>
-      <a href="partners.html">For Providers</a>
-      <a class="btn btn-sm" href="#book">Book Now</a>
+      <a href="#services" data-i18n="nav_services">সার্ভিস</a>
+      <a href="#how" data-i18n="nav_how">কীভাবে কাজ করে</a>
+      <a href="partners.html" data-i18n="nav_partners">প্রোভাইডার</a>
+      <a class="btn btn-sm" href="#book" data-i18n="nav_book">এখনই বুক করুন</a>
+      <button id="langToggle" class="btn btn-outline btn-sm" type="button">English</button>
     </nav>
   </header>
 
   <main>
     <section class="hero container">
-      <h1>Trusted local services, fast.</h1>
-      <p>AC servicing and home cleaning in Dhaka, with quick response and vetted service partners.</p>
+      <h1 data-i18n="hero_title">দ্রুত বিশ্বস্ত লোকাল সার্ভিস</h1>
+      <p data-i18n="hero_sub">ঢাকায় AC সার্ভিসিং এবং হোম ক্লিনিং—দ্রুত রেসপন্স, ভেরিফায়েড প্রোভাইডার, এবং ফেয়ার প্রাইস।</p>
       <div class="hero-cta">
-        <a class="btn" href="#book">Book a Service</a>
-        <a class="btn btn-outline" href="partners.html">Join as Provider</a>
+        <a class="btn" href="#book" data-i18n="hero_book">সার্ভিস বুক করুন</a>
+        <a class="btn btn-outline" href="partners.html" data-i18n="hero_join">প্রোভাইডার হিসেবে যোগ দিন</a>
       </div>
     </section>
 
     <section id="services" class="container section">
-      <h2>Launch Services (V1)</h2>
+      <h2 data-i18n="services_title">শুরুতে যে সার্ভিসগুলো</h2>
       <div class="cards">
         <article class="card">
-          <h3>AC Servicing</h3>
-          <p>General service, gas check/refill, cooling issue diagnosis, urgent repair.</p>
+          <h3 data-i18n="ac_title">AC সার্ভিসিং</h3>
+          <p data-i18n="ac_desc">জেনারেল সার্ভিস, গ্যাস চেক/রিফিল, কুলিং সমস্যা ডায়াগনসিস, জরুরি রিপেয়ার।</p>
         </article>
         <article class="card">
-          <h3>Home Cleaning</h3>
-          <p>Deep cleaning, move-in/move-out cleanup, kitchen and bathroom intensive service.</p>
+          <h3 data-i18n="clean_title">হোম ক্লিনিং</h3>
+          <p data-i18n="clean_desc">ডিপ ক্লিনিং, মুভ-ইন/মুভ-আউট ক্লিনআপ, কিচেন ও বাথরুম ইনটেনসিভ সার্ভিস।</p>
         </article>
       </div>
     </section>
 
     <section id="how" class="container section">
-      <h2>How it works</h2>
+      <h2 data-i18n="how_title">কীভাবে কাজ করে</h2>
       <ol>
-        <li>You submit your service request.</li>
-        <li>We match you with a verified provider in your area.</li>
-        <li>Provider confirms timing and completes the job.</li>
+        <li data-i18n="how_1">আপনি সার্ভিস রিকোয়েস্ট সাবমিট করেন।</li>
+        <li data-i18n="how_2">আমরা আপনার এরিয়ার ভেরিফায়েড প্রোভাইডারের সাথে ম্যাচ করি।</li>
+        <li data-i18n="how_3">প্রোভাইডার সময় কনফার্ম করে কাজ সম্পন্ন করে।</li>
       </ol>
     </section>
 
     <section id="book" class="container section form-wrap">
-      <h2>Book a Service</h2>
-      <p>Fill this quick form. We’ll route your request to the right provider.</p>
+      <h2 data-i18n="form_title">সার্ভিস বুকিং ফর্ম</h2>
+      <p data-i18n="form_sub">ফর্মটি পূরণ করুন, আমরা দ্রুত সঠিক প্রোভাইডারের কাছে রিকোয়েস্ট পাঠিয়ে দেব।</p>
 
       <form id="leadForm" class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
         <div class="grid">
-          <label>Full Name
+          <label data-i18n="label_name">পূর্ণ নাম
             <input name="name" type="text" required />
           </label>
-          <label>Phone / WhatsApp
+          <label data-i18n="label_phone">ফোন / WhatsApp
             <input name="phone" type="tel" required />
           </label>
         </div>
 
         <div class="grid">
-          <label>Service Type
+          <label data-i18n="label_service">সার্ভিস টাইপ
             <select name="service" required>
-              <option value="">Select one</option>
+              <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
               <option>AC Servicing</option>
               <option>AC Repair</option>
               <option>Home Cleaning</option>
               <option>Deep Cleaning</option>
             </select>
           </label>
-          <label>Area
-            <input name="area" type="text" placeholder="e.g. Dhanmondi" required />
+          <label data-i18n="label_area">এরিয়া
+            <input name="area" type="text" placeholder="যেমন: ধানমন্ডি" required />
           </label>
         </div>
 
-        <label>Preferred Time
-          <input name="time" type="text" placeholder="Today evening / Tomorrow morning" />
+        <label data-i18n="label_time">পছন্দের সময়
+          <input name="time" type="text" placeholder="আজ সন্ধ্যা / কাল সকাল" />
         </label>
 
-        <label>Problem / Notes
-          <textarea name="notes" rows="4" placeholder="Tell us what you need..."></textarea>
+        <label data-i18n="label_notes">সমস্যা / নোটস
+          <textarea name="notes" rows="4" placeholder="আপনার প্রয়োজন লিখুন..."></textarea>
         </label>
 
-        <button class="btn" type="submit">Submit Request</button>
-        <p class="note">By submitting, you agree to be contacted by ShojaBD or its service partners.</p>
+        <button class="btn" type="submit" data-i18n="btn_submit">রিকোয়েস্ট সাবমিট করুন</button>
+        <p class="note" data-i18n="form_note">সাবমিট করলে ShojaBD বা আমাদের পার্টনার আপনার সাথে যোগাযোগ করতে পারবে।</p>
       </form>
     </section>
   </main>
 
   <footer class="container footer">
-    <p>© <span id="year"></span> ShojaBD. All rights reserved.</p>
+    <p>© <span id="year"></span> ShojaBD. <span data-i18n="rights">সর্বস্বত্ব সংরক্ষিত।</span></p>
   </footer>
 
   <script src="assets/main.js"></script>

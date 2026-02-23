@@ -1,80 +1,81 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join as Provider | ShojaBD</title>
-  <meta name="description" content="Join ShojaBD as a service provider and get qualified leads in your service area." />
+  <title>ShojaBD | প্রোভাইডার হিসেবে যোগ দিন</title>
+  <meta name="description" content="ShojaBD-র সাথে প্রোভাইডার হিসেবে যুক্ত হয়ে কুয়ালিফায়েড লিড পান।" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <header class="container header">
     <div class="logo">ShojaBD</div>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="index.html#book">Book Service</a>
+      <a href="index.html">হোম</a>
+      <a href="index.html#book">বুকিং</a>
+      <button id="langToggle" class="btn btn-outline btn-sm" type="button">English</button>
     </nav>
   </header>
 
   <main class="container section">
-    <h1>Join as a Service Provider</h1>
-    <p>We connect providers with ready customers in Dhaka. Start with a trial and get matched leads in your service area.</p>
+    <h1 data-i18n="p_title">প্রোভাইডার হিসেবে যোগ দিন</h1>
+    <p data-i18n="p_sub">আমরা ঢাকায় সার্ভিস প্রোভাইডারদের জন্য রেডি কাস্টমার লিড পাঠাই। প্রথমে ট্রায়াল দিয়ে শুরু করুন।</p>
 
     <div class="cards">
       <article class="card">
-        <h3>How partners earn</h3>
+        <h3 data-i18n="p_earn_title">কীভাবে আয় হবে</h3>
         <ul>
-          <li>Pay per qualified lead, or monthly package</li>
-          <li>Leads filtered by area and service type</li>
-          <li>Priority routing for high-performing providers</li>
+          <li data-i18n="p_earn_1">প্রতি কুয়ালিফায়েড লিড বা মাসিক প্যাকেজ</li>
+          <li data-i18n="p_earn_2">এরিয়া ও সার্ভিসভিত্তিক লিড</li>
+          <li data-i18n="p_earn_3">ভালো পারফরমেন্সে বেশি লিড</li>
         </ul>
       </article>
       <article class="card">
-        <h3>Provider standards</h3>
+        <h3 data-i18n="p_std_title">প্রোভাইডার স্ট্যান্ডার্ড</h3>
         <ul>
-          <li>Respond quickly (target: 5–10 min)</li>
-          <li>Transparent pricing</li>
-          <li>Professional behavior and quality work</li>
+          <li data-i18n="p_std_1">দ্রুত রেসপন্স (৫–১০ মিনিট)</li>
+          <li data-i18n="p_std_2">স্বচ্ছ মূল্য</li>
+          <li data-i18n="p_std_3">পেশাদার আচরণ ও মানসম্পন্ন কাজ</li>
         </ul>
       </article>
     </div>
 
     <section class="form-wrap">
-      <h2>Apply Now</h2>
+      <h2 data-i18n="p_apply">এখনই আবেদন করুন</h2>
       <form class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
         <div class="grid">
-          <label>Business Name
+          <label data-i18n="p_business">ব্যবসার নাম
             <input name="business_name" type="text" required />
           </label>
-          <label>Contact Person
+          <label data-i18n="p_contact">কন্টাক্ট পারসন
             <input name="contact_person" type="text" required />
           </label>
         </div>
 
         <div class="grid">
-          <label>Phone / WhatsApp
+          <label data-i18n="p_phone">ফোন / WhatsApp
             <input name="phone" type="tel" required />
           </label>
-          <label>Primary Service
+          <label data-i18n="p_service">প্রধান সার্ভিস
             <select name="service" required>
-              <option value="">Select one</option>
+              <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
               <option>AC Servicing / Repair</option>
               <option>Home Cleaning</option>
             </select>
           </label>
         </div>
 
-        <label>Coverage Areas
-          <input name="areas" type="text" placeholder="e.g. Dhanmondi, Gulshan, Mirpur" required />
+        <label data-i18n="p_area">কভারেজ এরিয়া
+          <input name="areas" type="text" placeholder="যেমন: ধানমন্ডি, গুলশান, মিরপুর" required />
         </label>
 
-        <button class="btn" type="submit">Submit Provider Application</button>
+        <button class="btn" type="submit" data-i18n="p_submit">আবেদন সাবমিট করুন</button>
       </form>
     </section>
   </main>
 
   <footer class="container footer">
-    <p>© <span id="year"></span> ShojaBD. All rights reserved.</p>
+    <p>© <span id="year"></span> ShojaBD.</p>
   </footer>
 
   <script src="assets/main.js"></script>
