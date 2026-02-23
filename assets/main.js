@@ -63,6 +63,60 @@ const toggle = document.getElementById('langToggle');
 if (toggle) {
   toggle.addEventListener('click', () => {
     const current = localStorage.getItem('shojabd_lang') || 'bn';
-    setLang(current === 'bn' ? 'en' : 'bn');
+    const next = current === 'bn' ? 'en' : 'bn';
+    setLang(next);
+    setupWhatsAppLinks(next);
   });
 }
+
+const WA_NUMBER = '8801313399918';
+
+function setupWhatsAppLinks(lang = localStorage.getItem('shojabd_lang') || 'bn') {
+  const msg = lang === 'bn'
+    ? 'আসসালামু আলাইকুম, আমি ShojaBD থেকে সার্ভিস বুক করতে চাই।'
+    : 'Hi, I want to book a service from ShojaBD.';
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+
+  const waFloat = document.getElementById('whatsappFloat');
+  const waHeader = document.getElementById('whatsappHeader');
+
+  if (waFloat) {
+    waFloat.href = waUrl;
+    waFloat.textContent = lang === 'bn' ? 'WhatsApp এ চ্যাট' : 'Chat on WhatsApp';
+  }
+  if (waHeader) waHeader.href = waUrl;
+}
+
+setupWhatsAppLinks(saved);
+
+document.querySelectorAll('.lead-form').forEach((form) => {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (_) {}
+
+    const name = data.get('name') || data.get('contact_person') || '';
+    const business = data.get('business_name') || '';
+    const phone = data.get('phone') || '';
+    const service = data.get('service') || '';
+    const area = data.get('area') || data.get('areas') || '';
+    const notes = data.get('notes') || '';
+    const time = data.get('time') || '';
+
+    const lang = localStorage.getItem('shojabd_lang') || 'bn';
+    const message = lang === 'bn'
+      ? `নতুন লিড - ShojaBD%0Aনাম: ${name}%0Aব্যবসা: ${business}%0Aফোন: ${phone}%0Aসার্ভিস: ${service}%0Aএরিয়া: ${area}%0Aসময়: ${time}%0Aনোট: ${notes}`
+      : `New Lead - ShojaBD%0AName: ${name}%0ABusiness: ${business}%0APhone: ${phone}%0AService: ${service}%0AArea: ${area}%0APreferred Time: ${time}%0ANotes: ${notes}`;
+
+    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
+    alert(lang === 'bn' ? 'রিকোয়েস্ট নেওয়া হয়েছে। WhatsApp-এ কনফার্ম করতে একটি উইন্ডো খোলা হয়েছে।' : 'Request received. A WhatsApp window has been opened for confirmation.');
+    form.reset();
+  });
+});
