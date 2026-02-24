@@ -4,6 +4,17 @@ function track(event, params = {}) {
   }
 }
 
+
+function updateFormProgress(form) {
+  const fields = Array.from(form.querySelectorAll('input[required], select[required], textarea[required]'));
+  const filled = fields.filter((el) => String(el.value || '').trim().length > 0).length;
+  const pct = Math.round((filled / Math.max(fields.length, 1)) * 100);
+  const bar = document.getElementById('formProgressBar');
+  const text = document.getElementById('formProgressText');
+  if (bar) bar.style.width = `${pct}%`;
+  if (text) text.textContent = `Progress: ${pct}%`;
+}
+
 const i18n = {
   en: {
     nav_services: 'Services', nav_how: 'How it works', nav_partners: 'Providers', nav_book: 'Book Now',
@@ -102,11 +113,28 @@ track('view_page', { path: location.pathname, lang: saved });
 const leadForm = document.getElementById('leadForm');
 if (leadForm) {
   let started = false;
+  updateFormProgress(leadForm);
+
   leadForm.addEventListener('input', () => {
-    if (started) return;
-    started = true;
-    track('lead_form_started', { path: location.pathname });
-  }, { once: true });
+    if (!started) {
+      started = true;
+      track('lead_form_started', { path: location.pathname });
+    }
+    updateFormProgress(leadForm);
+  });
+
+  const serviceSelect = document.getElementById('serviceSelect');
+  document.querySelectorAll('.chip[data-service]').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      if (serviceSelect) {
+        serviceSelect.value = chip.getAttribute('data-service') || '';
+        serviceSelect.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+      document.querySelectorAll('.chip[data-service]').forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
+      track('quick_service_tapped', { service: serviceSelect?.value || '' });
+    });
+  });
 
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -155,5 +183,7 @@ if (leadForm) {
     track('whatsapp_opened_with_ref', { ref: leadRef, service: payload.service });
     alert(lang === 'bn' ? 'ধন্যবাদ। আপনার তথ্য ভেরিফাই হয়েছে এবং WhatsApp-এ রেডি মেসেজ খোলা হয়েছে।' : 'Thanks. Your lead details were verified and WhatsApp opened with a ready message.');
     leadForm.reset();
+    document.querySelectorAll('.chip[data-service]').forEach((c) => c.classList.remove('active'));
+    updateFormProgress(leadForm);
   });
 }

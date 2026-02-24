@@ -80,6 +80,10 @@
       <h2 data-i18n="form_title">সার্ভিস বুকিং ফর্ম</h2>
       <p data-i18n="form_sub">ফর্মটি পূরণ করুন, আমরা দ্রুত সঠিক প্রোভাইডারের কাছে রিকোয়েস্ট পাঠিয়ে দেব।</p>
       <p class="note" style="margin-top:-4px">Estimated form time: ~45 seconds</p>
+      <div class="form-progress" aria-live="polite">
+        <div class="form-progress-bar" id="formProgressBar"></div>
+      </div>
+      <p class="note" id="formProgressText">Progress: 0%</p>
 
       <form id="leadForm" class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
         <div class="grid">
@@ -96,7 +100,7 @@
             <input name="company" type="text" required />
           </label>
           <label data-i18n="label_service">সার্ভিস টাইপ
-            <select name="service" required>
+            <select name="service" id="serviceSelect" required>
               <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
               <option>AC Servicing</option>
               <option>AC Repair</option>
@@ -104,6 +108,13 @@
               <option>Deep Cleaning</option>
             </select>
           </label>
+        </div>
+
+        <div class="quick-services" aria-label="quick service selection">
+          <button type="button" class="chip" data-service="AC Servicing">AC Servicing</button>
+          <button type="button" class="chip" data-service="AC Repair">AC Repair</button>
+          <button type="button" class="chip" data-service="Home Cleaning">Home Cleaning</button>
+          <button type="button" class="chip" data-service="Deep Cleaning">Deep Cleaning</button>
         </div>
 
         <div class="grid">
