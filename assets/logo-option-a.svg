@@ -1,0 +1,21 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="360" rx="24" fill="#F5F9FF"/>
+
+  <!-- Icon: speed mark -->
+  <g transform="translate(70,78)">
+    <rect x="0" y="0" width="200" height="200" rx="40" fill="#0E1A32"/>
+    <path d="M46 112C46 79.97 71.97 54 104 54H145L109 90H104C91.85 90 82 99.85 82 112C82 124.15 91.85 134 104 134H145L109 170H104C71.97 170 46 144.03 46 112Z" fill="#59A6FF"/>
+    <rect x="36" y="94" width="44" height="8" rx="4" fill="#59A6FF" opacity="0.8"/>
+    <rect x="30" y="110" width="34" height="8" rx="4" fill="#59A6FF" opacity="0.65"/>
+    <rect x="36" y="126" width="24" height="8" rx="4" fill="#59A6FF" opacity="0.5"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="320" y="165" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="112" font-weight="800" fill="#0E1A32" letter-spacing="-1.5">Shoja</text>
+  <text x="700" y="165" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="112" font-weight="800" fill="#2E8CFF" letter-spacing="-1.5">BD</text>
+
+  <!-- Tagline -->
+  <text x="324" y="220" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="500" fill="#4B5E84">Fast • Verified • Local Services</text>
+
+
+</svg>

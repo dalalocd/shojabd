@@ -1,0 +1,16 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1080" rx="120" fill="#0E1A32"/>
+
+  <!-- Icon tile -->
+  <g transform="translate(300,170)">
+    <rect x="0" y="0" width="480" height="480" rx="96" fill="#112447"/>
+    <path d="M110 240C110 163.2 172.2 101 249 101H348L261 188H249C219.2 188 195 212.2 195 242C195 271.8 219.2 296 249 296H348L261 383H249C172.2 383 110 320.8 110 244V240Z" fill="#59A6FF"/>
+    <rect x="86" y="198" width="98" height="16" rx="8" fill="#59A6FF" opacity="0.9"/>
+    <rect x="72" y="228" width="78" height="16" rx="8" fill="#59A6FF" opacity="0.72"/>
+    <rect x="86" y="258" width="56" height="16" rx="8" fill="#59A6FF" opacity="0.54"/>
+  </g>
+
+  <!-- Brand text -->
+  <text x="540" y="760" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="136" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Shoja</text>
+  <text x="540" y="900" text-anchor="middle" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="136" font-weight="800" fill="#59A6FF" letter-spacing="-1">BD</text>
+</svg>
