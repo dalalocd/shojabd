@@ -5,6 +5,10 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (isBlockedAssetPath(url.pathname)) {
+      return new Response('Not found', { status: 404 });
+    }
+
     if (url.pathname === '/api/lead/create' && request.method === 'POST') {
       return handleLeadCreate(request, env);
     }
@@ -173,6 +177,10 @@ function safeEqual(a, b) {
   let out = 0;
   for (let i = 0; i < a.length; i++) out |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return out === 0;
+}
+
+function isBlockedAssetPath(pathname) {
+  return /^(\/\.git|\/\.wrangler|\/worker\.mjs$|\/wrangler\.jsonc$|\/package\.json$|\/package-lock\.json$|\/pnpm-lock\.yaml$|\/yarn\.lock$)/i.test(pathname);
 }
 
 function json(data, status = 200) {
