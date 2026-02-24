@@ -1,3 +1,9 @@
+function track(event, params = {}) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', event, params);
+  }
+}
+
 const i18n = {
   en: {
     nav_services: 'Services', nav_how: 'How it works', nav_partners: 'Providers', nav_book: 'Book Now',
@@ -81,17 +87,27 @@ function setupWhatsAppLinks(lang = localStorage.getItem('shojabd_lang') || 'bn')
   if (waFloat) {
     waFloat.href = targetUrl;
     waFloat.textContent = lang === 'bn' ? 'ফর্ম পূরণ করে WhatsApp' : 'Fill Form → WhatsApp';
+    waFloat.onclick = () => track('click_whatsapp_cta', { location: 'float', target: targetUrl });
   }
   if (waHeader) {
     waHeader.href = targetUrl;
     waHeader.textContent = lang === 'bn' ? 'ফর্ম দিয়ে শুরু করুন' : 'Start with Form';
+    waHeader.onclick = () => track('click_whatsapp_cta', { location: 'header', target: targetUrl });
   }
 }
 
 setupWhatsAppLinks(saved);
+track('view_page', { path: location.pathname, lang: saved });
 
 const leadForm = document.getElementById('leadForm');
 if (leadForm) {
+  let started = false;
+  leadForm.addEventListener('input', () => {
+    if (started) return;
+    started = true;
+    track('lead_form_started', { path: location.pathname });
+  }, { once: true });
+
   leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(leadForm);
@@ -120,7 +136,9 @@ if (leadForm) {
       const json = await res.json();
       if (!json?.ok || !json?.ref) throw new Error('lead_create_invalid');
       leadRef = json.ref;
+      track('lead_form_submitted', { service: payload.service, area: payload.area });
     } catch (_) {
+      track('lead_submit_error', { reason: 'api_unavailable' });
       const lang = localStorage.getItem('shojabd_lang') || 'bn';
       alert(lang === 'bn'
         ? 'দুঃখিত, এখন লিড ভেরিফিকেশন সার্ভিস কাজ করছে না। অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন।'
@@ -134,6 +152,7 @@ if (leadForm) {
       : `Lead Intake (ShojaBD)\nRef: ${leadRef}\nName: ${payload.name}\nCompany: ${payload.company}\nPhone: ${payload.phone}\nService: ${payload.service}\nBudget: ${payload.budget}\nTimeline: ${payload.timeline}\nArea: ${payload.area}\nPreferred Time: ${payload.time}\nNeed: ${payload.notes}`;
 
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(messageText)}`, '_blank');
+    track('whatsapp_opened_with_ref', { ref: leadRef, service: payload.service });
     alert(lang === 'bn' ? 'ধন্যবাদ। আপনার তথ্য ভেরিফাই হয়েছে এবং WhatsApp-এ রেডি মেসেজ খোলা হয়েছে।' : 'Thanks. Your lead details were verified and WhatsApp opened with a ready message.');
     leadForm.reset();
   });

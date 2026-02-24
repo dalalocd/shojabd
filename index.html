@@ -3,9 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShojaBD | দ্রুত বিশ্বস্ত লোকাল সার্ভিস</title>
-  <meta name="description" content="ঢাকায় AC সার্ভিসিং ও হোম ক্লিনিং বুক করুন দ্রুত এবং বিশ্বস্ত সার্ভিস পার্টনারদের মাধ্যমে।" />
+  <title>ShojaBD | AC সার্ভিসিং ও হোম ক্লিনিং in Dhaka</title>
+  <meta name="description" content="ঢাকায় AC সার্ভিসিং ও হোম ক্লিনিং বুক করুন দ্রুত এবং বিশ্বস্ত সার্ভিস পার্টনারদের মাধ্যমে। ShojaBD verified provider matching and fast booking." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta property="og:title" content="ShojaBD | AC সার্ভিসিং ও হোম ক্লিনিং in Dhaka" />
+  <meta property="og:description" content="Fast local services in Dhaka with verified providers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://shojabd.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://shojabd.com/" />
   <link rel="stylesheet" href="assets/styles.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "ShojaBD",
+      "url": "https://shojabd.com",
+      "telephone": "+8801313399918",
+      "areaServed": "Dhaka",
+      "sameAs": ["https://wa.me/8801313399918"],
+      "description": "ShojaBD provides AC servicing and home cleaning lead matching in Dhaka."
+    }
+  </script>
 </head>
 <body>
   <header class="container header">
@@ -27,6 +46,11 @@
       <div class="hero-cta">
         <a class="btn" href="#book" data-i18n="hero_book">সার্ভিস বুক করুন</a>
         <a class="btn btn-outline" href="partners.html" data-i18n="hero_join">প্রোভাইডার হিসেবে যোগ দিন</a>
+      </div>
+      <div class="trust-row" aria-label="trust signals">
+        <span>⚡ Fast response</span>
+        <span>✅ Verified providers</span>
+        <span>💬 WhatsApp confirmation</span>
       </div>
     </section>
 
@@ -56,6 +80,7 @@
     <section id="book" class="container section form-wrap">
       <h2 data-i18n="form_title">সার্ভিস বুকিং ফর্ম</h2>
       <p data-i18n="form_sub">ফর্মটি পূরণ করুন, আমরা দ্রুত সঠিক প্রোভাইডারের কাছে রিকোয়েস্ট পাঠিয়ে দেব।</p>
+      <p class="note" style="margin-top:-4px">Estimated form time: ~45 seconds</p>
 
       <form id="leadForm" class="lead-form" action="https://formspree.io/f/xjkoebdb" method="POST">
         <div class="grid">
@@ -127,6 +152,20 @@
   </footer>
 
   <a id="whatsappFloat" class="wa-float" target="_blank" rel="noopener">WhatsApp</a>
+  <script>
+    // Set your GA4 Measurement ID here, e.g. 'G-XXXXXXXXXX'
+    window.SHOJABD_GA_ID = window.SHOJABD_GA_ID || '';
+    if (window.SHOJABD_GA_ID) {
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${window.SHOJABD_GA_ID}`;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ dataLayer.push(arguments); };
+      gtag('js', new Date());
+      gtag('config', window.SHOJABD_GA_ID);
+    }
+  </script>
   <script src="assets/main.js"></script>
 </body>
 </html>
