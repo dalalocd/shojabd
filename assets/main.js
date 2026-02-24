@@ -11,8 +11,9 @@ function updateFormProgress(form) {
   const pct = Math.round((filled / Math.max(fields.length, 1)) * 100);
   const bar = document.getElementById('formProgressBar');
   const text = document.getElementById('formProgressText');
+  const lang = localStorage.getItem('shojabd_lang') || 'bn';
   if (bar) bar.style.width = `${pct}%`;
-  if (text) text.textContent = `Progress: ${pct}%`;
+  if (text) text.textContent = lang === 'bn' ? `অগ্রগতি: ${pct}%` : `Progress: ${pct}%`;
 }
 
 const i18n = {
@@ -29,6 +30,7 @@ const i18n = {
     label_name: 'Full Name', label_phone: 'Phone / WhatsApp', label_company: 'Company / Brand', label_service: 'Service Type', label_budget: 'Budget Range', label_timeline: 'Timeline', label_area: 'Area',
     label_time: 'Preferred Time', label_notes: 'Problem / Notes (min 30 chars)', btn_submit: 'Submit Request',
     form_note: 'By submitting, you agree to be contacted by ShojaBD or its service partners.', rights: 'All rights reserved.',
+    area_ph: 'e.g. Dhanmondi', time_ph: 'Today evening / Tomorrow morning', notes_ph: 'Write your requirement...',
     p_title: 'Join as a Service Provider', p_sub: 'We send ready customer leads to service providers in Dhaka. Start with a trial.',
     p_earn_title: 'How partners earn', p_earn_1: 'Pay per qualified lead or monthly package', p_earn_2: 'Area and service filtered leads', p_earn_3: 'More leads for high performers',
     p_std_title: 'Provider standards', p_std_1: 'Fast response (5–10 min)', p_std_2: 'Transparent pricing', p_std_3: 'Professional behavior and quality work',
@@ -48,6 +50,7 @@ const i18n = {
     label_name: 'পূর্ণ নাম', label_phone: 'ফোন / WhatsApp', label_company: 'কোম্পানি / ব্র্যান্ড', label_service: 'সার্ভিস টাইপ', label_budget: 'বাজেট রেঞ্জ', label_timeline: 'কবে দরকার', label_area: 'এরিয়া',
     label_time: 'পছন্দের সময়', label_notes: 'সমস্যা / নোটস (কমপক্ষে ৩০ অক্ষর)', btn_submit: 'রিকোয়েস্ট সাবমিট করুন',
     form_note: 'সাবমিট করলে ShojaBD বা আমাদের পার্টনার আপনার সাথে যোগাযোগ করতে পারবে।', rights: 'সর্বস্বত্ব সংরক্ষিত।',
+    area_ph: 'যেমন: ধানমন্ডি', time_ph: 'আজ সন্ধ্যা / কাল সকাল', notes_ph: 'আপনার প্রয়োজন লিখুন...',
     p_title: 'প্রোভাইডার হিসেবে যোগ দিন', p_sub: 'আমরা ঢাকায় সার্ভিস প্রোভাইডারদের জন্য রেডি কাস্টমার লিড পাঠাই। প্রথমে ট্রায়াল দিয়ে শুরু করুন।',
     p_earn_title: 'কীভাবে আয় হবে', p_earn_1: 'প্রতি কুয়ালিফায়েড লিড বা মাসিক প্যাকেজ', p_earn_2: 'এরিয়া ও সার্ভিসভিত্তিক লিড', p_earn_3: 'ভালো পারফরমেন্সে বেশি লিড',
     p_std_title: 'প্রোভাইডার স্ট্যান্ডার্ড', p_std_1: 'দ্রুত রেসপন্স (৫–১০ মিনিট)', p_std_2: 'স্বচ্ছ মূল্য', p_std_3: 'পেশাদার আচরণ ও মানসম্পন্ন কাজ',
@@ -69,6 +72,14 @@ function setLang(lang) {
 
   const toggle = document.getElementById('langToggle');
   if (toggle) toggle.textContent = lang === 'bn' ? 'English' : 'বাংলা';
+
+  const area = document.querySelector('input[name="area"]');
+  const time = document.querySelector('input[name="time"]');
+  const notes = document.querySelector('textarea[name="notes"]');
+  if (area) area.placeholder = i18n[lang].area_ph;
+  if (time) time.placeholder = i18n[lang].time_ph;
+  if (notes) notes.placeholder = i18n[lang].notes_ph;
+
   localStorage.setItem('shojabd_lang', lang);
 }
 
