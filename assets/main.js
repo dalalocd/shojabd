@@ -90,38 +90,51 @@ function setupWhatsAppLinks(lang = localStorage.getItem('shojabd_lang') || 'bn')
 
 setupWhatsAppLinks(saved);
 
-document.querySelectorAll('.lead-form').forEach((form) => {
-  form.addEventListener('submit', async (e) => {
+const leadForm = document.getElementById('leadForm');
+if (leadForm) {
+  leadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = new FormData(form);
-    const leadRef = `SHJ-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
-    data.append('lead_ref', leadRef);
+    const data = new FormData(leadForm);
 
+    const payload = {
+      name: String(data.get('name') || '').trim(),
+      phone: String(data.get('phone') || '').trim(),
+      company: String(data.get('company') || '').trim(),
+      service: String(data.get('service') || '').trim(),
+      budget: String(data.get('budget') || '').trim(),
+      timeline: String(data.get('timeline') || '').trim(),
+      area: String(data.get('area') || '').trim(),
+      time: String(data.get('time') || '').trim(),
+      notes: String(data.get('notes') || '').trim()
+    };
+
+    let leadRef = '';
     try {
-      await fetch(form.action, {
+      const res = await fetch('/api/lead/create', {
         method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
-    } catch (_) {}
 
-    const name = data.get('name') || data.get('contact_person') || '';
-    const company = data.get('company') || data.get('business_name') || '';
-    const phone = data.get('phone') || '';
-    const service = data.get('service') || '';
-    const budget = data.get('budget') || '';
-    const timeline = data.get('timeline') || '';
-    const area = data.get('area') || data.get('areas') || '';
-    const notes = data.get('notes') || '';
-    const time = data.get('time') || '';
+      if (!res.ok) throw new Error('lead_create_failed');
+      const json = await res.json();
+      if (!json?.ok || !json?.ref) throw new Error('lead_create_invalid');
+      leadRef = json.ref;
+    } catch (_) {
+      const lang = localStorage.getItem('shojabd_lang') || 'bn';
+      alert(lang === 'bn'
+        ? 'দুঃখিত, এখন লিড ভেরিফিকেশন সার্ভিস কাজ করছে না। অনুগ্রহ করে একটু পরে আবার চেষ্টা করুন।'
+        : 'Sorry, lead verification is unavailable right now. Please try again shortly.');
+      return;
+    }
 
     const lang = localStorage.getItem('shojabd_lang') || 'bn';
     const messageText = lang === 'bn'
-      ? `Lead Intake (ShojaBD)\nRef: ${leadRef}\nনাম: ${name}\nকোম্পানি: ${company}\nফোন: ${phone}\nসার্ভিস: ${service}\nবাজেট: ${budget}\nটাইমলাইন: ${timeline}\nএরিয়া: ${area}\nপছন্দের সময়: ${time}\nপ্রয়োজন: ${notes}`
-      : `Lead Intake (ShojaBD)\nRef: ${leadRef}\nName: ${name}\nCompany: ${company}\nPhone: ${phone}\nService: ${service}\nBudget: ${budget}\nTimeline: ${timeline}\nArea: ${area}\nPreferred Time: ${time}\nNeed: ${notes}`;
+      ? `Lead Intake (ShojaBD)\nRef: ${leadRef}\nনাম: ${payload.name}\nকোম্পানি: ${payload.company}\nফোন: ${payload.phone}\nসার্ভিস: ${payload.service}\nবাজেট: ${payload.budget}\nটাইমলাইন: ${payload.timeline}\nএরিয়া: ${payload.area}\nপছন্দের সময়: ${payload.time}\nপ্রয়োজন: ${payload.notes}`
+      : `Lead Intake (ShojaBD)\nRef: ${leadRef}\nName: ${payload.name}\nCompany: ${payload.company}\nPhone: ${payload.phone}\nService: ${payload.service}\nBudget: ${payload.budget}\nTimeline: ${payload.timeline}\nArea: ${payload.area}\nPreferred Time: ${payload.time}\nNeed: ${payload.notes}`;
 
     window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(messageText)}`, '_blank');
-    alert(lang === 'bn' ? 'ধন্যবাদ। আপনার তথ্য নেওয়া হয়েছে এবং WhatsApp-এ রেডি মেসেজ খোলা হয়েছে।' : 'Thanks. Your details were captured and WhatsApp opened with a ready message.');
-    form.reset();
+    alert(lang === 'bn' ? 'ধন্যবাদ। আপনার তথ্য ভেরিফাই হয়েছে এবং WhatsApp-এ রেডি মেসেজ খোলা হয়েছে।' : 'Thanks. Your lead details were verified and WhatsApp opened with a ready message.');
+    leadForm.reset();
   });
-});
+}

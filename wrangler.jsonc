@@ -1,7 +1,13 @@
 {
   "name": "shojabd",
+  "main": "worker.mjs",
   "compatibility_date": "2026-02-23",
   "assets": {
     "directory": "."
+  },
+  "vars": {
+    // Set this in Cloudflare dashboard/secrets for production:
+    // wrangler secret put LEAD_SIGNING_SECRET
+    "FORMSPREE_ENDPOINT": "https://formspree.io/f/xjkoebdb"
   }
 }
