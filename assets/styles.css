@@ -33,6 +33,7 @@ nav a:hover { color: #fff; }
 .hero h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 12px; }
 .hero p { color: var(--muted); max-width: 640px; }
 .hero-cta { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; }
+.trust-row { margin-top: 14px; display: flex; gap: 14px; color: var(--muted); font-size: .92rem; flex-wrap: wrap; }
 
 .btn {
   background: var(--brand);
@@ -115,5 +116,80 @@ input:focus, select:focus, textarea:focus {
 }
 
 @media (max-width: 720px) {
-  nav a { margin-left: 10px; font-size: .95rem; }
+  .container { width: min(100%, 94%); }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  nav a,
+  nav button {
+    margin-left: 0;
+    font-size: .95rem;
+  }
+
+  nav .btn-sm {
+    padding: 10px 12px;
+    font-size: .9rem;
+  }
+
+  .hero {
+    padding: 34px 0 18px;
+  }
+
+  .hero p {
+    font-size: .98rem;
+    line-height: 1.5;
+  }
+
+  .trust-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: .9rem;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .form-wrap {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  input, select, textarea {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+  }
 }
