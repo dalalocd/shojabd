@@ -9,8 +9,8 @@ const i18n = {
     clean_title: 'Home Cleaning', clean_desc: 'Deep cleaning, move-in/move-out cleanup, kitchen and bathroom intensive service.',
     how_title: 'How it works', how_1: 'Submit your service request.', how_2: 'We match you with a verified provider in your area.', how_3: 'Provider confirms timing and completes the job.',
     form_title: 'Book a Service', form_sub: 'Fill this quick form and we’ll route your request to the right provider.',
-    label_name: 'Full Name', label_phone: 'Phone / WhatsApp', label_service: 'Service Type', label_area: 'Area',
-    label_time: 'Preferred Time', label_notes: 'Problem / Notes', btn_submit: 'Submit Request',
+    label_name: 'Full Name', label_phone: 'Phone / WhatsApp', label_company: 'Company / Brand', label_service: 'Service Type', label_budget: 'Budget Range', label_timeline: 'Timeline', label_area: 'Area',
+    label_time: 'Preferred Time', label_notes: 'Problem / Notes (min 30 chars)', btn_submit: 'Submit Request',
     form_note: 'By submitting, you agree to be contacted by ShojaBD or its service partners.', rights: 'All rights reserved.',
     p_title: 'Join as a Service Provider', p_sub: 'We send ready customer leads to service providers in Dhaka. Start with a trial.',
     p_earn_title: 'How partners earn', p_earn_1: 'Pay per qualified lead or monthly package', p_earn_2: 'Area and service filtered leads', p_earn_3: 'More leads for high performers',
@@ -28,8 +28,8 @@ const i18n = {
     clean_title: 'হোম ক্লিনিং', clean_desc: 'ডিপ ক্লিনিং, মুভ-ইন/মুভ-আউট ক্লিনআপ, কিচেন ও বাথরুম ইনটেনসিভ সার্ভিস।',
     how_title: 'কীভাবে কাজ করে', how_1: 'আপনি সার্ভিস রিকোয়েস্ট সাবমিট করেন।', how_2: 'আমরা আপনার এরিয়ার ভেরিফায়েড প্রোভাইডারের সাথে ম্যাচ করি।', how_3: 'প্রোভাইডার সময় কনফার্ম করে কাজ সম্পন্ন করে।',
     form_title: 'সার্ভিস বুকিং ফর্ম', form_sub: 'ফর্মটি পূরণ করুন, আমরা দ্রুত সঠিক প্রোভাইডারের কাছে রিকোয়েস্ট পাঠিয়ে দেব।',
-    label_name: 'পূর্ণ নাম', label_phone: 'ফোন / WhatsApp', label_service: 'সার্ভিস টাইপ', label_area: 'এরিয়া',
-    label_time: 'পছন্দের সময়', label_notes: 'সমস্যা / নোটস', btn_submit: 'রিকোয়েস্ট সাবমিট করুন',
+    label_name: 'পূর্ণ নাম', label_phone: 'ফোন / WhatsApp', label_company: 'কোম্পানি / ব্র্যান্ড', label_service: 'সার্ভিস টাইপ', label_budget: 'বাজেট রেঞ্জ', label_timeline: 'কবে দরকার', label_area: 'এরিয়া',
+    label_time: 'পছন্দের সময়', label_notes: 'সমস্যা / নোটস (কমপক্ষে ৩০ অক্ষর)', btn_submit: 'রিকোয়েস্ট সাবমিট করুন',
     form_note: 'সাবমিট করলে ShojaBD বা আমাদের পার্টনার আপনার সাথে যোগাযোগ করতে পারবে।', rights: 'সর্বস্বত্ব সংরক্ষিত।',
     p_title: 'প্রোভাইডার হিসেবে যোগ দিন', p_sub: 'আমরা ঢাকায় সার্ভিস প্রোভাইডারদের জন্য রেডি কাস্টমার লিড পাঠাই। প্রথমে ট্রায়াল দিয়ে শুরু করুন।',
     p_earn_title: 'কীভাবে আয় হবে', p_earn_1: 'প্রতি কুয়ালিফায়েড লিড বা মাসিক প্যাকেজ', p_earn_2: 'এরিয়া ও সার্ভিসভিত্তিক লিড', p_earn_3: 'ভালো পারফরমেন্সে বেশি লিড',
@@ -72,19 +72,20 @@ if (toggle) {
 const WA_NUMBER = '8801313399918';
 
 function setupWhatsAppLinks(lang = localStorage.getItem('shojabd_lang') || 'bn') {
-  const msg = lang === 'bn'
-    ? 'আসসালামু আলাইকুম, আমি ShojaBD থেকে সার্ভিস বুক করতে চাই।'
-    : 'Hi, I want to book a service from ShojaBD.';
-  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  const hasBookingForm = !!document.getElementById('leadForm');
+  const targetUrl = hasBookingForm ? '#book' : 'index.html#book';
 
   const waFloat = document.getElementById('whatsappFloat');
   const waHeader = document.getElementById('whatsappHeader');
 
   if (waFloat) {
-    waFloat.href = waUrl;
-    waFloat.textContent = lang === 'bn' ? 'WhatsApp এ চ্যাট' : 'Chat on WhatsApp';
+    waFloat.href = targetUrl;
+    waFloat.textContent = lang === 'bn' ? 'ফর্ম পূরণ করে WhatsApp' : 'Fill Form → WhatsApp';
   }
-  if (waHeader) waHeader.href = waUrl;
+  if (waHeader) {
+    waHeader.href = targetUrl;
+    waHeader.textContent = lang === 'bn' ? 'ফর্ম দিয়ে শুরু করুন' : 'Start with Form';
+  }
 }
 
 setupWhatsAppLinks(saved);
@@ -93,6 +94,8 @@ document.querySelectorAll('.lead-form').forEach((form) => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
+    const leadRef = `SHJ-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    data.append('lead_ref', leadRef);
 
     try {
       await fetch(form.action, {
@@ -103,20 +106,22 @@ document.querySelectorAll('.lead-form').forEach((form) => {
     } catch (_) {}
 
     const name = data.get('name') || data.get('contact_person') || '';
-    const business = data.get('business_name') || '';
+    const company = data.get('company') || data.get('business_name') || '';
     const phone = data.get('phone') || '';
     const service = data.get('service') || '';
+    const budget = data.get('budget') || '';
+    const timeline = data.get('timeline') || '';
     const area = data.get('area') || data.get('areas') || '';
     const notes = data.get('notes') || '';
     const time = data.get('time') || '';
 
     const lang = localStorage.getItem('shojabd_lang') || 'bn';
-    const message = lang === 'bn'
-      ? `নতুন লিড - ShojaBD%0Aনাম: ${name}%0Aব্যবসা: ${business}%0Aফোন: ${phone}%0Aসার্ভিস: ${service}%0Aএরিয়া: ${area}%0Aসময়: ${time}%0Aনোট: ${notes}`
-      : `New Lead - ShojaBD%0AName: ${name}%0ABusiness: ${business}%0APhone: ${phone}%0AService: ${service}%0AArea: ${area}%0APreferred Time: ${time}%0ANotes: ${notes}`;
+    const messageText = lang === 'bn'
+      ? `Lead Intake (ShojaBD)\nRef: ${leadRef}\nনাম: ${name}\nকোম্পানি: ${company}\nফোন: ${phone}\nসার্ভিস: ${service}\nবাজেট: ${budget}\nটাইমলাইন: ${timeline}\nএরিয়া: ${area}\nপছন্দের সময়: ${time}\nপ্রয়োজন: ${notes}`
+      : `Lead Intake (ShojaBD)\nRef: ${leadRef}\nName: ${name}\nCompany: ${company}\nPhone: ${phone}\nService: ${service}\nBudget: ${budget}\nTimeline: ${timeline}\nArea: ${area}\nPreferred Time: ${time}\nNeed: ${notes}`;
 
-    window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-    alert(lang === 'bn' ? 'রিকোয়েস্ট নেওয়া হয়েছে। WhatsApp-এ কনফার্ম করতে একটি উইন্ডো খোলা হয়েছে।' : 'Request received. A WhatsApp window has been opened for confirmation.');
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(messageText)}`, '_blank');
+    alert(lang === 'bn' ? 'ধন্যবাদ। আপনার তথ্য নেওয়া হয়েছে এবং WhatsApp-এ রেডি মেসেজ খোলা হয়েছে।' : 'Thanks. Your details were captured and WhatsApp opened with a ready message.');
     form.reset();
   });
 });

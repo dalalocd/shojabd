@@ -68,6 +68,9 @@
         </div>
 
         <div class="grid">
+          <label data-i18n="label_company">কোম্পানি / ব্র্যান্ড
+            <input name="company" type="text" required />
+          </label>
           <label data-i18n="label_service">সার্ভিস টাইপ
             <select name="service" required>
               <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
@@ -77,17 +80,40 @@
               <option>Deep Cleaning</option>
             </select>
           </label>
-          <label data-i18n="label_area">এরিয়া
-            <input name="area" type="text" placeholder="যেমন: ধানমন্ডি" required />
+        </div>
+
+        <div class="grid">
+          <label data-i18n="label_budget">বাজেট রেঞ্জ
+            <select name="budget" required>
+              <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
+              <option>Below 2,000 BDT</option>
+              <option>2,000 - 5,000 BDT</option>
+              <option>5,000 - 10,000 BDT</option>
+              <option>10,000+ BDT</option>
+            </select>
+          </label>
+          <label data-i18n="label_timeline">কবে দরকার
+            <select name="timeline" required>
+              <option value="" data-i18n="opt_select">একটি বেছে নিন</option>
+              <option>Urgent (Today)</option>
+              <option>Within 2-3 days</option>
+              <option>This week</option>
+              <option>Flexible</option>
+            </select>
           </label>
         </div>
 
-        <label data-i18n="label_time">পছন্দের সময়
-          <input name="time" type="text" placeholder="আজ সন্ধ্যা / কাল সকাল" />
-        </label>
+        <div class="grid">
+          <label data-i18n="label_area">এরিয়া
+            <input name="area" type="text" placeholder="যেমন: ধানমন্ডি" required />
+          </label>
+          <label data-i18n="label_time">পছন্দের সময়
+            <input name="time" type="text" placeholder="আজ সন্ধ্যা / কাল সকাল" required />
+          </label>
+        </div>
 
         <label data-i18n="label_notes">সমস্যা / নোটস
-          <textarea name="notes" rows="4" placeholder="আপনার প্রয়োজন লিখুন..."></textarea>
+          <textarea name="notes" rows="4" placeholder="আপনার প্রয়োজন লিখুন..." minlength="30" required></textarea>
         </label>
 
         <button class="btn" type="submit" data-i18n="btn_submit">রিকোয়েস্ট সাবমিট করুন</button>
