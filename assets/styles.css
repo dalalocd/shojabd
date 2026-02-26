@@ -100,6 +100,9 @@ nav a:hover { color: #fff; }
 }
 .card h3 { margin-top: 0; }
 .card p, .card li { color: var(--muted); }
+.card-highlight { border-color: #3b82f6; box-shadow: 0 0 0 1px rgba(59,130,246,.35) inset; }
+.price { color: #dbeafe !important; font-weight: 700; margin: 6px 0 10px; }
+.feature-list { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
 
 ol li { margin: 10px 0; color: var(--muted); }
 
