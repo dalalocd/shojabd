@@ -18,6 +18,10 @@ export default {
       return handleLeadVerify(request, env, url);
     }
 
+    if (url.pathname === '/api/websites/lead-create' && request.method === 'POST') {
+      return handleWebsiteLeadCreate(request, env);
+    }
+
     // Order workflow APIs
     if (url.pathname === '/api/orders/create' && request.method === 'POST') {
       return handleOrderCreate(request, env);
@@ -116,6 +120,47 @@ async function handleLeadVerify(request, env, url) {
 
   const verified = await verifyLeadRef(ref, env.LEAD_SIGNING_SECRET);
   return json({ ok: true, qualified: verified.ok, reason: verified.reason, ref });
+}
+
+async function handleWebsiteLeadCreate(request, env) {
+  if (!env.LEAD_SIGNING_SECRET) {
+    return json({ ok: false, error: 'missing_signing_secret' }, 500);
+  }
+
+  const body = await safeJson(request);
+  if (!body.ok) return json({ ok: false, error: 'invalid_json' }, 400);
+
+  const lead = {
+    name: String(body.data?.name || '').trim(),
+    phone: String(body.data?.phone || '').trim(),
+    business_name: String(body.data?.business_name || '').trim(),
+    business_type: String(body.data?.business_type || '').trim(),
+    goal: String(body.data?.goal || '').trim(),
+    budget: String(body.data?.budget || '').trim(),
+    notes: String(body.data?.notes || '').trim()
+  };
+
+  if (!lead.name || !lead.phone || !lead.business_name || !lead.business_type || !lead.goal || !lead.budget || !lead.notes) {
+    return json({ ok: false, error: 'missing_fields' }, 400);
+  }
+
+  const ref = await createSignedRef('WEB', env.LEAD_SIGNING_SECRET);
+
+  try {
+    const formspreeEndpoint = env.FORMSPREE_ENDPOINT || DEFAULT_FORMSPREE_ENDPOINT;
+    const formData = new URLSearchParams({
+      website_ref: ref,
+      source: 'website_builder_form',
+      ...lead
+    });
+    await fetch(formspreeEndpoint, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: formData.toString()
+    });
+  } catch {}
+
+  return json({ ok: true, ref });
 }
 
 // -----------------------------
@@ -505,13 +550,17 @@ function validateLead(lead) {
 }
 
 async function createLeadRef(secret) {
+  return createSignedRef('SHJ', secret);
+}
+
+async function createSignedRef(prefix, secret) {
   const now = Date.now();
   const date = new Date(now).toISOString().slice(0, 10).replace(/-/g, '');
   const nonce = randomToken(6);
   const ts = String(now);
   const payload = `${ts}.${nonce}`;
   const sig = await signPayload(payload, secret);
-  return `SHJ-${date}-${ts}-${nonce}-${sig.slice(0, 12).toUpperCase()}`;
+  return `${prefix}-${date}-${ts}-${nonce}-${sig.slice(0, 12).toUpperCase()}`;
 }
 
 async function verifyLeadRef(ref, secret) {
