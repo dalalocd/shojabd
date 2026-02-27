@@ -92,6 +92,8 @@ nav a:hover { color: #fff; }
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 16px;
 }
+.split-cards { margin-top: 20px; }
+.split-cards .card p { min-height: 44px; }
 .card {
   background: rgba(19,28,48,.8);
   border: 1px solid var(--border);
